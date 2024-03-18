@@ -17,7 +17,6 @@
 
 3. Add file `.env` and config `.env`
    ```
-   {
    MODE=dev
    SERVICE_NAME=futsalpro
    MONGODB_URL=[INSER-MONGODB-URL]
@@ -25,7 +24,6 @@
    AUTHORIZATION_MIDTRANS=Basic [INSERT-YOUR-SERVER-KEY-MIDTRANS]
    URL_MIDTRANS=https://app.sandbox.midtrans.com/snap/v1/transactions
    URL_MIDTRANS_STATUS=https://api.sandbox.midtrans.com/v2
-   }
    ```
 4. run `npm install` in terminal for install packages
 5. Run the project using `npm run dev`
