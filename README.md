@@ -34,5 +34,5 @@
 2. Using MongoDB Database.
 3. Supporting ODM (Object Document Mapper) Mongoose.
 4. Authentication JWT Token.
-5. Password hashing & Encryption.
+5. Password hashing & Encryption with BcryptJs.
 6. 7 Collection folders contain a total of 29 API Endpoints.
