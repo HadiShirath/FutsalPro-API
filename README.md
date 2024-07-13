@@ -1,6 +1,6 @@
 # FutsalPro API Postman Collection
 
-[![Run in Postman](https://run.pstmn.io/button.svg)](https://documenter.getpostman.com/view/25132098/2sA2xnyAAx)
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://documenter.getpostman.com/view/25132098/2sA3e5eoer)
 
 ## Introduction
 
@@ -12,7 +12,7 @@
 2. Import:
 
    - Use this button to download:
-     [![Run in Postman](https://run.pstmn.io/button.svg)](https://documenter.getpostman.com/view/25132098/2sA2xnyAAx) , or
+     [![Run in Postman](https://run.pstmn.io/button.svg)](https://documenter.getpostman.com/view/25132098/2sA3e5eoer) , or
    - Clone or [download](../../archive/master.zip) this repository, then import postman collections from `FutsalPro API.postman_collection.json` file.
 
 3. Add file `.env` and config `.env`
@@ -36,3 +36,4 @@
 4. Authentication JWT Token.
 5. Password hashing & Encryption with BcryptJs.
 6. 7 Collection folders contain a total of 29 API Endpoints.
+7. Unit Testing with Jest (33 unit tests)
