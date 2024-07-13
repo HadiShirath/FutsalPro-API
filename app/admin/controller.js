@@ -57,7 +57,7 @@ module.exports = {
   users: async (req, res) => {
     try {
       const user = await User.find();
-      res.status(200).json({ data: user });
+      res.status(200).json({ status: "success", payload: user });
     } catch (err) {
       res.status(500).json({ message: err.message || "Internal Server Error" });
     }

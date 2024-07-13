@@ -34,7 +34,7 @@ module.exports = {
 
         cart = new Cart(newCartdata);
         await cart.save();
-        res.status(200).json({ data: cart });
+        res.status(201).json({ data: cart });
       } else {
         const payloadDetail = payload.detail;
 
@@ -69,7 +69,7 @@ module.exports = {
 
         cart = new Cart(newCartdata);
         await cart.save();
-        res.status(200).json({ data: cart });
+        res.status(201).json({ data: cart });
       }
     } catch (err) {
       res.status(500).json({ message: err.message || "Internal Server Error" });

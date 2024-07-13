@@ -21,6 +21,7 @@ module.exports = {
 
       const order = await Order.findOne({ orderId: id });
 
+
       if (order.confirmation === "approved") {
         return res.status(200).json({
           confirmation: "approved",
@@ -71,15 +72,18 @@ module.exports = {
             })
           );
 
+
           let dataAll = [];
           let filteredData = [];
 
           await Promise.all(
             detail.map(async (item) => {
-              checkDate = await Schedule.findOne({ date: item.date });
+              const checkDate = await Schedule.findOne({ date: item.date });
+
 
               if (checkDate) {
                 const datafilter = filterDataApprove(item, checkDate);
+
 
                 if (datafilter) {
                   filteredData.push(datafilter);
@@ -95,11 +99,12 @@ module.exports = {
                 );
               } else {
                 filteredData.push(item);
-                schedule = new Schedule(item);
+                const schedule = new Schedule(item);
                 await schedule.save();
               }
             })
           );
+
 
           let confirmation = "rejected";
           let messageConfirmation = "Jadwal yang anda pesan sudah terisi.!";
@@ -140,17 +145,48 @@ module.exports = {
             { new: true }
           );
 
+
           res.status(200).json({
             confirmation: confirmation,
             message: messageConfirmation,
             data: orders,
           });
         } else {
-          res.status(403).json({ message: "Data User tidak ditemukan.!" });
+          res.status(404).json({ message: "Data User tidak ditemukan.!" });
         }
       } else {
-        res.status(403).json({ message: "Order ID tidak ditemukan.!" });
+        res.status(404).json({ message: "Order ID tidak ditemukan.!" });
       }
+    } catch (err) {
+      res.status(500).json({ message: err.message || "Internal Server Error" });
+    }
+  },
+  addReminder: async (req, res) => {
+    try {
+      const { id } = req.params;
+      const { reminder = "" } = req.body;
+
+      const order = await Order.findOneAndUpdate(
+        { orderId: id },
+        { reminder },
+        { new: true }
+      );
+      
+      res.status(200).json({ data: order });
+    } catch (err) {
+      res.status(500).json({ message: err.message || "Internal Server Error" });
+    }
+  },
+  deleteReminder: async (req, res) => {
+    try {
+      const { id } = req.params;
+
+      const order = await Order.findOneAndUpdate(
+        { orderId: id },
+        { reminder: "" },
+        { new: true }
+      );
+      res.status(200).json({ data: order });
     } catch (err) {
       res.status(500).json({ message: err.message || "Internal Server Error" });
     }
@@ -162,13 +198,14 @@ module.exports = {
       let result = [];
 
       const order = await Order.findOne({ orderId: id, user: req.user._id });
+
       if (!order) throw new Error("Order ID tidak ditemukan.!");
 
       let detail = order.detail;
 
       await Promise.all(
         detail.map(async (item) => {
-          checkDate = await Schedule.findOne({ date: item.date });
+          const checkDate = await Schedule.findOne({ date: item.date });
 
           if (checkDate) {
             const filteredData = await filterDataSchedule(checkDate, detail);
@@ -191,6 +228,7 @@ module.exports = {
         })
       );
 
+
       // hapus data order
       await Order.deleteOne({ orderId: id });
 
@@ -200,6 +238,7 @@ module.exports = {
     }
   },
 };
+
 
 const mergeData = (data1, data2) => {
   if (data1.date !== data2.date) throw new Error("Tanggal data tidak cocok");
@@ -323,8 +362,6 @@ const filterDataSchedule = async (data1, data2) => {
         })
         .flat()
     );
-
-    console.log(JSON.stringify(scheduleTimes, null, 2));
 
     const newData = data1.item.map((detail) => {
       // Filter waktu jadwal yang cocok dengan data1

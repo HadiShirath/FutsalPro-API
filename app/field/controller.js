@@ -49,7 +49,7 @@ module.exports = {
               photo: fileName,
             });
 
-            res.status(200).json({ data: field });
+            res.status(201).json({ data: field });
           } catch (err) {}
         });
       } else {
