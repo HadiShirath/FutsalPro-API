@@ -115,7 +115,7 @@ describe("schedule", () => {
   });
 
   describe("status payment", () => {
-    it("should return 200 and payment successfully", async () => {
+    it("should return 200 and get status successfully", async () => {
       const tokenUser = await getUserToken();
 
       const orderId = orderUser.orderId; //example new orderId User
